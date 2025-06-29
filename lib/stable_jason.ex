@@ -28,6 +28,7 @@ defmodule StableJason do
   """
   def encode(input, opts \\ []) do
     {sorter, opts} = Keyword.pop(opts, :sorter)
+
     case Encoder.encode(input, sorter || :asc) do
       {:ok, result} -> Jason.encode(result, opts)
       {:error, error} -> {:error, error}
@@ -54,6 +55,7 @@ defmodule StableJason do
   """
   def encode!(input, opts \\ []) do
     {sorter, opts} = Keyword.pop(opts, :sorter)
+
     case Encoder.encode(input, sorter || :asc) do
       {:ok, result} -> Jason.encode!(result, opts)
       {:error, error} -> raise error
