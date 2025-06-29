@@ -61,6 +61,13 @@ defmodule StableJason.EncoderTest do
                 ]}
     end
 
+    test "using a sorter atom" do
+      input = %{a: 5, aa: 4, b: 9, A: 12}
+
+      assert Encoder.encode(input, :desc) ==
+               {:ok, %Jason.OrderedObject{values: [{"b", 9}, {"aa", 4}, {"a", 5}, {"A", 12}]}}
+    end
+
     test "using a sorter function" do
       input = %{a: 5, aa: 4, b: 9, A: 12}
 
